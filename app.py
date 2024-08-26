@@ -4,7 +4,7 @@ import numpy as np
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from PIL import Image
-#mport streamlit.web.cli as stcli
+from PIL import ImageEnhance
 #import matplotlib.pyplot as plt
 #import io
 
@@ -14,11 +14,20 @@ model_directory = r"Neuroscanaimodel.h5"
 
 model = tf.keras.models.load_model(model_directory)
 
-# Function to make predictions
+def enhance_contrast(image, factor=4):
+    enhancer = ImageEnhance.Contrast(image)
+    return enhancer.enhance(factor)
+
 def predict(image):
+    # Enhance the contrast
+    image = enhance_contrast(image)
+
+    # Preprocess the image for prediction
     image = img_to_array(image)
     image = image / 255
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+    
+    # Predict
     prediction = model.predict(image)
     return prediction
 
