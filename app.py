@@ -5,7 +5,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from PIL import Image
 from PIL import ImageEnhance
-import cv2 
+#import cv2 
 #import matplotlib.pyplot as plt
 #import io
 
